@@ -1,0 +1,31 @@
+<html>
+<body style="min-width: 200px;">
+
+<form action="result.html" action="get">
+<div id="form">
+
+  <div id="message"></dev>
+
+  <input type="hidden" name="url" id="input_url" value="" />
+  <input type="hidden" name="old_text" id="old_text" value="" />
+
+  <div>
+    Website: <span id="url"></span>
+  </div>
+
+  <div>
+    Changing this: <span id="label_old_text" style="text-decoration: line-through; color: red;"></span>
+  </div>
+
+  <div>
+    To this: <input type="text" id="new_text" name="new_text" size="10" value="" style="color: green;" />
+  </div>
+
+  <input type="submit" value="Fix it!" />
+
+</div>
+</form>
+
+<script type="text/javascript" src="popup.js"></script>
+</body>
+</html>
