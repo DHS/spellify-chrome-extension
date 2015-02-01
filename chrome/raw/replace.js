@@ -64,7 +64,7 @@ function replaceText(old_text, new_text) {
       }
     }
   }
-};
+}
 
 /**
  * Run replacements!
