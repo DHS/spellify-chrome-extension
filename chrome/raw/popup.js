@@ -53,13 +53,3 @@ chrome.tabs.executeScript( {
   }
 
 });
-
-
-
-
-
-
-
-
-
-
