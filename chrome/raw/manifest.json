@@ -6,7 +6,8 @@
   "permissions": [
     "http://*/*",
     "https://*/*",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "icons": {
     "16": "16.png"

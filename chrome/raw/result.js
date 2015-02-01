@@ -49,6 +49,16 @@ jsonObject = JSON.stringify(obj);
 
 // #todo Save somewhere!
 
+/*
+var replacements = {};
+replacements['fruit'] = 'apple';
+chrome.storage.sync.set(replacements);
+
+chrome.storage.sync.get('fruit', function (saved) {
+    document.getElementById('message').innerHTML = "Saved: <br />" + JSON.stringify(saved['fruit']);
+});
+*/
+
 // Print the output
 setTimeout(function(){
   document.getElementById('message').innerHTML = "Saved: <br />" + jsonObject;
