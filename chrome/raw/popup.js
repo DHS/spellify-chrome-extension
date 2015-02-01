@@ -1,5 +1,44 @@
 
 /**
+ * Get the source from the main window
+ */
+chrome.extension.onMessage.addListener(function(request, sender) {
+  if (request.action == "getSource") {
+    checkHtml(request.source);
+  }
+});
+
+/**
+ * Check the main page html for multiple instances of the selection text
+ * If more than one then print a warning
+ *
+ */
+function checkHtml(html) {
+
+  var selection = document.getElementById('old_text').value;
+  var re = new RegExp(selection, 'g');
+
+  if (html.match(re).length > 1) {
+    document.write('More than one occurence of "' + selection + '" found. Please highlight just a couple more characters to the left and right of the misspelling.');
+  }
+}
+
+/**
+ * Fetch the page html
+ */
+function onWindowLoad() {
+  chrome.tabs.executeScript(null, {
+    file: "gethtml.js"
+  }, function() {
+    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+    if (chrome.extension.lastError) {
+      message.innerText = 'There was an error injecting script : \n' + chrome.extension.lastError.message;
+    }
+  });
+}
+window.onload = onWindowLoad;
+
+/**
  * Get page url to pass to popup
  * http://stackoverflow.com/questions/19164474/chrome-extension-get-selected-text
  *
@@ -16,7 +55,7 @@ chrome.tabs.getSelected(null, function(tab) {
   var url = document.createElement('a');
   url.href = tab.url;
 
-  //
+  // Pass site name to form
   document.getElementById('url').innerHTML = url.hostname;
 
 });
