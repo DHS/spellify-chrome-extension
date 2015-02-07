@@ -1,28 +1,26 @@
-/**
- *
- * 1. Determine current page url
- * 2. Fetch replacements
- * 3. Run replacements
- *
- */
 
 /**
- * Fetch replacements
+ * Load replacements from storage
  *
  */
-// #todo Load from somewhere!
-var replacements = [
-  {
-    'url'     : 'http://www.bbc.co.uk/news/world-europe-31072321',
-    'old_text': 'Greek Prime Minister Alexis Tsipras',
-    'new_text': 'Greek Prime Minister Alexis Lilliputia'
-  },
-  {
-     'url'     : 'http://www.bbc.co.uk/news/world-europe-31072321',
-     'old_text': 'German Chancellor Angela Merkel',
-     'new_text': 'German Chancellor Angela Schmerkel'
+chrome.storage.sync.get('replacements', function (obj) {
+  runReplacements(obj);
+});
+
+/**
+ * Run replacements
+ *
+ */
+function runReplacements(data) {
+
+  // Check for replacements for this page
+  if (pageReplacements = data.replacements[document.URL]) {
+
+    for (var i = 0, len = pageReplacements.length; i < len; i++) {
+      replaceText(pageReplacements[i]['old_text'], pageReplacements[i]['new_text']);
+    }
   }
-];
+}
 
 /**
  * Replacement function
@@ -65,11 +63,3 @@ function replaceText(old_text, new_text) {
     }
   }
 }
-
-/**
- * Run replacements!
- *
- */
-replacements.forEach( function(arrayItem) {
-  replaceText(arrayItem.old_text, arrayItem.new_text);
-});

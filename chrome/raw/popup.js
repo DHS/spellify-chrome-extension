@@ -1,6 +1,7 @@
 
 /**
  * Get the source from the main window
+ *
  */
 chrome.extension.onMessage.addListener(function(request, sender) {
   if (request.action == "getSource") {
