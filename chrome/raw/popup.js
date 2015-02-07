@@ -16,9 +16,9 @@ chrome.extension.onMessage.addListener(function(request, sender) {
  */
 function checkHtml(html) {
 
-  var oldTextCount = 0;
   var selection = document.getElementById('old_text').value;
   var re = new RegExp(selection, 'g');
+  var oldTextCount = 0;
 
   // Load all nodes
   var nodes = document.getElementsByTagName("*");
