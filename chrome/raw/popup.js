@@ -55,16 +55,13 @@ function checkHtml(html) {
 
 /**
  * Fetch the page html
+ *
+ * Originally via:
+ * http://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
+ *
  */
 function onWindowLoad() {
-  chrome.tabs.executeScript(null, {
-    file: "gethtml.js"
-  }, function() {
-    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-    if (chrome.extension.lastError) {
-      message.innerText = 'There was an error injecting script : \n' + chrome.extension.lastError.message;
-    }
-  });
+  chrome.tabs.executeScript(null, {file: "gethtml.js"});
 }
 window.onload = onWindowLoad;
 
