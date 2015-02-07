@@ -17,7 +17,7 @@ function processNewReplacement(data) {
   prepareNewReplacement();
 
   // Get replacements for this page
-  if (pageReplacements = data.replacements[url]) {
+  if (data.replacements && (pageReplacements = data.replacements[url])) {
 
     // Add new replacement to existing replacements
     pageReplacements.push({
@@ -26,6 +26,11 @@ function processNewReplacement(data) {
     });
 
   } else {
+
+    // If no replacements at all then create empty object
+    if (typeof data.replacements === 'undefined') {
+      data.replacements = {};
+    };
 
     // Create entry for this page
     data.replacements[url] = [{
