@@ -14,7 +14,7 @@ chrome.storage.sync.get('replacements', function (obj) {
 function runReplacements(data) {
 
   // Check for replacements for this page
-  if (pageReplacements = data.replacements[document.URL]) {
+  if (data.replacements && (pageReplacements = data.replacements[document.URL])) {
 
     for (var i = 0, len = pageReplacements.length; i < len; i++) {
       replaceText(pageReplacements[i]['old_text'], pageReplacements[i]['new_text']);
