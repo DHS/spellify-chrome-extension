@@ -56,7 +56,7 @@ function replaceText(old_text, new_text) {
           node.data = node.data.replace(re, new_text);
 
           // And log to the console
-          console.log('Match found for "' + old_text + '"');
+          //console.log('Match found for "' + old_text + '"');
 
         }
       }

@@ -42,7 +42,7 @@ function processNewReplacement(data) {
 
   // Save replacements including new one
   chrome.storage.sync.set({'replacements': data.replacements}, function() {
-    console.log('Replacement saved:', data.replacements);
+    //console.log('Replacement saved:', data.replacements);
   });
 
   // Update UI with success message
