@@ -16,7 +16,7 @@
   },
   "browser_action": {
     "default_icon": "32.png",
-    "default_title": "Spellify",
+    "default_title": "Fix a spelling mistake",
     "default_popup": "popup.html"
   },
   "content_scripts": [
