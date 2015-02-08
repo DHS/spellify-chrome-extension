@@ -5,5 +5,5 @@
  */
 chrome.extension.sendMessage({
     action: "getSource",
-    source: document.documentElement.outerHTML
+    source: document.body.innerText
 });

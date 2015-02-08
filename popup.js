@@ -16,40 +16,36 @@ chrome.extension.onMessage.addListener(function(request, sender) {
  */
 function checkHtml(html) {
 
-  var selection = document.getElementById('old_text').value;
-  var re = new RegExp(selection, 'g');
-  var oldTextCount = 0;
+  try {
 
-  // Load all nodes
-  var nodes = document.getElementsByTagName("*");
-
-  // Loop through nodes
-  for (var i = 0; i < nodes.length; i++) {
-
-    // Find child nodes
-    var subNodes = nodes[i].childNodes;
-
-    // Loop through child nodes
-    for (var j = 0; j < subNodes.length; j++) {
-
-      var node = subNodes[j];
-
-      // Check that child node is text node and has data
-      if (node.nodeType === 3 && node.data) {
-
-        // Check whether node contains the text to replace
-        if (node.data.match(re)) {
-
-          // Increment counter
-          oldTextCount++;
-        }
-      }
+    var old_text = document.getElementById('old_text');
+    if (old_text == null) {
+      throw 'Start by highlight the spelling mistake you\'re fixing...';
     }
-  }
 
-  // Check instances of text to replace
-  if (oldTextCount > 1) {
-    document.write('More than one occurence of "' + selection + '" found. Please highlight just a couple more characters to the left and right of the misspelling.');
+    var selection = old_text.value;
+    if (selection == '') {
+      throw 'Selection appears to be empty.';
+    }
+
+    var re = new RegExp(selection, 'g');
+    var oldTextCount = 0;
+
+    if (html.match(re) != null) {
+      oldTextCount = html.match(re).length;
+    }
+
+    //console.log(oldTextCount + ' instance(s) of "' + selection + '" found')
+
+    // Check instances of text to replace
+    if (oldTextCount > 1) {
+      throw 'More than one occurence of "' + selection + '" found. Please highlight just a couple more characters to the left and right of the misspelling.';
+    }
+
+  } catch(err) {
+    //console.log(err);
+    document.write(err);
+    return false;
   }
 }
 
