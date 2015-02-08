@@ -47,15 +47,7 @@ function processNewReplacement(data) {
 
   // Update UI with success message
   setTimeout(function(){
-    document.getElementById('message').innerHTML = "Saved!";
-  }, 1000);
-
-  // Refresh the parent page
-  setTimeout(function(){
-    chrome.tabs.getSelected(null, function(tab) {
-      var code = 'window.location.reload();';
-      chrome.tabs.executeScript(tab.id, {code: code});
-    });
+    document.getElementById('message').innerHTML = '<p>Saved!</p><p><a href="#" onclick="javascript:goToTwitter();">Tweet</a> &middot; <a href="#" onclick="javascript:refreshParent();">Refresh</a></p>';
   }, 1000);
 }
 
@@ -118,4 +110,19 @@ function urlToObj(url) {
   // Result!
   return obj;
 
+}
+
+function refreshParent() {
+  chrome.tabs.getSelected(null, function(tab) {
+    var code = 'window.location.reload();';
+    chrome.tabs.executeScript(tab.id, {code: code});
+  });
+}
+
+function goToTwitter() {
+  chrome.tabs.getSelected(null, function(tab) {
+    var message = 'I just fixed a spelling mistake with Spellify!';
+    var code = 'window.location.href = "http://twitter.com/home?status=' + encodeURIComponent(message) + '";';
+    chrome.tabs.executeScript(tab.id, {code: code});
+  });
 }
