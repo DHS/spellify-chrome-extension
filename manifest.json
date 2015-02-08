@@ -1,5 +1,6 @@
 {
   "name": "Spellify",
+  "short_name": "Spellify",
   "description": "Fix spelling mistakes on any web page",
   "version": "0.0.1",
   "manifest_version": 2,
