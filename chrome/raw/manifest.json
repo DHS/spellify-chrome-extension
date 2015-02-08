@@ -1,6 +1,6 @@
 {
   "name": "Spellify",
-  "description": "Fix spellings on websites",
+  "description": "Fix spelling mistakes on websites",
   "version": "0.0.1",
   "manifest_version": 2,
   "permissions": [
