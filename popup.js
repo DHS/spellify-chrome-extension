@@ -4,8 +4,8 @@
  *
  */
 chrome.extension.onMessage.addListener(function(request, sender) {
-  if (request.action == "getSource") {
-    checkHtml(request.source);
+  if (request.action == "getText") {
+    checkPageText(request.content);
   }
 });
 
@@ -14,32 +14,32 @@ chrome.extension.onMessage.addListener(function(request, sender) {
  * If more than one then print a warning
  *
  */
-function checkHtml(html) {
+function checkPageText(pageText) {
 
   try {
 
-    var old_text = document.getElementById('old_text');
-    if (old_text == null) {
+    var oldTextElement = document.getElementById('old_text');
+    if (oldTextElement == null) {
       throw 'Start by highlight the spelling mistake you\'re fixing...';
     }
 
-    var selection = old_text.value;
-    if (selection == '') {
+    var oldText = oldTextElement.value;
+    if (oldText == '') {
       throw 'Selection appears to be empty.';
     }
 
-    var re = new RegExp(selection, 'g');
+    var re = new RegExp(oldText, 'g');
     var oldTextCount = 0;
 
-    if (html.match(re) != null) {
-      oldTextCount = html.match(re).length;
+    if (pageText.match(re) != null) {
+      oldTextCount = pageText.match(re).length;
     }
 
-    //console.log(oldTextCount + ' instance(s) of "' + selection + '" found')
+    //console.log(oldTextCount + ' instance(s) of "' + oldText + '" found')
 
     // Check instances of text to replace
     if (oldTextCount > 1) {
-      throw 'More than one occurence of "' + selection + '" found. Please highlight just a couple more characters to the left and right of the misspelling.';
+      throw 'More than one occurence of "' + oldText + '" found. Please highlight just a couple more characters to the left and right of the misspelling.';
     }
 
   } catch(err) {
@@ -57,7 +57,7 @@ function checkHtml(html) {
  *
  */
 function onWindowLoad() {
-  chrome.tabs.executeScript(null, {file: "gethtml.js"});
+  chrome.tabs.executeScript(null, {file: "gettext.js"});
 }
 window.onload = onWindowLoad;
 

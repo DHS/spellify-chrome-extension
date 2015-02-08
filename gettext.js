@@ -4,6 +4,6 @@
  *
  */
 chrome.extension.sendMessage({
-    action: "getSource",
-    source: document.body.innerText
+    action: "getText",
+    content: document.body.innerText
 });
